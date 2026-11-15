@@ -1,0 +1,74 @@
+Automated tests (provider HTTP responses mocked)
+................                                                         [100%]
+16 passed in 0.17s
+
+Local Uvicorn smoke test (provider credentials absent)
+GET /docs -> HTTP 200
+POST /posting ('Missing CTA') -> HTTP 422
+{
+  "detail": [
+    {
+      "type": "value_error",
+      "loc": [
+        "body",
+        "message"
+      ],
+      "msg": "Value error, Include exactly one CTA URL with an explicit HTTP(S) scheme.",
+      "input": "Missing CTA",
+      "ctx": {
+        "error": {}
+      }
+    }
+  ]
+}
+POST /posting ('Read https://example.com/news') -> HTTP 200
+{
+  "success": false,
+  "results": [
+    {
+      "platform": "Mastodon",
+      "status": "failed",
+      "posted_url": null,
+      "public_access": false,
+      "date": null,
+      "time": null,
+      "error": "Missing configuration: MASTODON_URL, MASTODON_TOKEN"
+    },
+    {
+      "platform": "Bluesky",
+      "status": "failed",
+      "posted_url": null,
+      "public_access": false,
+      "date": null,
+      "time": null,
+      "error": "Missing configuration: BLUESKY_IDENTIFIER, BLUESKY_APP_PASSWORD"
+    },
+    {
+      "platform": "Misskey",
+      "status": "failed",
+      "posted_url": null,
+      "public_access": false,
+      "date": null,
+      "time": null,
+      "error": "Missing configuration: MISSKEY_URL, MISSKEY_TOKEN"
+    },
+    {
+      "platform": "GitHub Gist",
+      "status": "failed",
+      "posted_url": null,
+      "public_access": false,
+      "date": null,
+      "time": null,
+      "error": "Missing configuration: GITHUB_GIST_TOKEN"
+    },
+    {
+      "platform": "WordPress",
+      "status": "failed",
+      "posted_url": null,
+      "public_access": false,
+      "date": null,
+      "time": null,
+      "error": "Missing configuration: WORDPRESS_URL, WORDPRESS_USERNAME, WORDPRESS_APP_PASSWORD"
+    }
+  ]
+}
